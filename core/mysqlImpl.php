@@ -162,7 +162,7 @@ class mysqlImpl implements DbProviderInterface
             if (!isset($dbConfig['port']) || (!$dbConfig['port'])) {
                 $dbConfig['port'] = self::DEFAULT_ADAPTER_PORT;
             }
-            $dsn .= ';port=' . $dbConfig['port'];
+            $dsn .= ';port=' . trim($dbConfig['port']);
         }
         if (isset($dbConfig['charset']) || (!$dbConfig['charset'])) {
             $dsn .= ';charset=' . trim($dbConfig['charset']);

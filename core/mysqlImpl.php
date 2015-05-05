@@ -99,7 +99,6 @@ class mysqlImpl implements DbProviderInterface
         try {
             $this->_db = new PDO($dsn, $dbConfig['username'], $dbConfig['password']);
         } catch (Exception $ex) {
-            echo $ex;
             throw new Exception('´´½¨PDOÊ§°Ü');
         }
 
@@ -146,7 +145,7 @@ class mysqlImpl implements DbProviderInterface
     private function _createDsn(array $dbConfig)
     {
         $dsn = '';
-        if (!isset($dbConfig['adapter'])) {
+        if (!isset($dbConfig['adapter']) || !$dbConfig['adapter'])  {
             $dsn .= self::DEFAULT_ADAPTER_TYPE . ':';
         } else {
             $dsn .= trim($dbConfig['adapter']) . ':';

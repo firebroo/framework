@@ -96,7 +96,6 @@ class mysqlImpl implements DbProviderInterface
         }
 
         $dsn = $this->_createDsn($dbConfig);
-        echo $dsn;
         try {
             $this->_db = new PDO($dsn, $dbConfig['username'], $dbConfig['password']);
         } catch (Exception $ex) {
@@ -123,6 +122,11 @@ class mysqlImpl implements DbProviderInterface
 
         return self::$_instance;
     }
+
+    /**
+     * 防止深拷贝产生新的对象
+     */
+    public function __clone() {}
 
     /**
      * 释放数据库连接
@@ -659,8 +663,7 @@ class mysqlImpl implements DbProviderInterface
         $i = 1;
         foreach ($data as $key => $value) {
             $dataType = $this->getBindValueDataType($value);
-            $stmt->bindValue($i, $value, $dataType);
-            ++$i;
+            $stmt->bindValue($i++, $value, $dataType);
         }
 
         $this->_stmt = $stmt;
@@ -689,6 +692,6 @@ class mysqlImpl implements DbProviderInterface
 }
 $db = mysqlImpl::getInstance();
 //$db->insert('user',array('id'=>3,'name'=>'firebroo'));
-print_r($db->select()->from('user')->having(array('name ='=>'dog'))->group('id')->limit(1)->offset(0)->queryAll());
+print_r($db->select()->from('user')->where(array('id >='=>1))->having(array('name ='=>'dog'))->group('id')->limit(1)->offset(0)->queryAll());
 
 

@@ -10,29 +10,29 @@ include(dirname(__FILE__) . '/DbProviderInterface.php');
 class mysqlImpl implements DbProviderInterface
 {
     /**
-     * @var å•ä¾‹å¯¹è±¡
+     * @var µ¥Àı¶ÔÏó
      */
     private static $_instance;
 
     /**
-     * @var PDOå¥æŸ„èµ„æº
+     * @var PDO¾ä±ú×ÊÔ´
      */
     private $_db;
 
     /**
-     * @var æœ€ç»ˆæ‰§è¡Œçš„statement object
+     * @var ×îÖÕÖ´ĞĞµÄstatement object
      */
     private $_stmt;
 
     /**
      * @var int
-     * å—å½±å“çš„è¡Œæ•°
+     * ÊÜÓ°ÏìµÄĞĞÊı
      */
     private $_rowCount = 0;
 
     /**
      * @var array
-     * sqlæ‹¼æ¥ä¾èµ–å­—æ®µ
+     * sqlÆ´½ÓÒÀÀµ×Ö¶Î
      */
     private $_sqlQuery = array(
         'SELECT' => array(),
@@ -47,7 +47,7 @@ class mysqlImpl implements DbProviderInterface
 
     /**
      * @var array
-     * sqlå…³è”ä¾èµ–å­—æ®µ
+     * sql¹ØÁªÒÀÀµ×Ö¶Î
      */
     private $_joinTypes = array(
         'INNER JOIN' => '',
@@ -57,17 +57,17 @@ class mysqlImpl implements DbProviderInterface
 
     /**
      * @var string
-     * æœ€ç»ˆæ‹¼æ¥ä¹‹åçš„sqlè¯­å¥
+     * ×îÖÕÆ´½ÓÖ®ºóµÄsqlÓï¾ä
      */
     private $_querySql = '';
 
     /**
-     * mysqlé»˜è®¤é€‚é…ç«¯å£
+     * mysqlÄ¬ÈÏÊÊÅä¶Ë¿Ú
      */
     const DEFAULT_ADAPTER_PORT = 3306;
 
     /**
-     * æ•°æ®åº“é»˜è®¤é€‚é…å™¨
+     * Êı¾İ¿âÄ¬ÈÏÊÊÅäÆ÷
      */
     const DEFAULT_ADAPTER_TYPE = 'mysql';
 
@@ -91,7 +91,7 @@ class mysqlImpl implements DbProviderInterface
             if (file_exists($dbConfigFile)) {
                 $dbConfig = require_once($dbConfigFile);
             } else {
-                throw new Exception("æ•°æ®æºé…ç½®æ–‡ä»¶ä¸å­˜åœ¨");
+                throw new Exception("Êı¾İÔ´ÅäÖÃÎÄ¼ş²»´æÔÚ");
             }
         }
 
@@ -101,7 +101,7 @@ class mysqlImpl implements DbProviderInterface
             $this->_db = new PDO($dsn, $dbConfig['username'], $dbConfig['password']);
         } catch (Exception $ex) {
             echo $ex;
-            throw new Exception('åˆ›å»ºPDOå¤±è´¥');
+            throw new Exception('´´½¨PDOÊ§°Ü');
         }
 
         $this->_db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
@@ -113,7 +113,7 @@ class mysqlImpl implements DbProviderInterface
     /**
      * @param null $config
      * @return mysqlImpl
-     * è·å–Dbå•ä¾‹
+     * »ñÈ¡Dbµ¥Àı
      */
     public static function getInstance($config = null)
     {
@@ -125,7 +125,7 @@ class mysqlImpl implements DbProviderInterface
     }
 
     /**
-     * é‡Šæ”¾æ•°æ®åº“è¿æ¥
+     * ÊÍ·ÅÊı¾İ¿âÁ¬½Ó
      */
     public static function unsetInstance()
     {
@@ -137,7 +137,7 @@ class mysqlImpl implements DbProviderInterface
      * @param array $dbConfig
      * @return string
      * @throws Exception
-     * åˆ›å»ºæ•°æ®æºï¼Œæä¾›ç»™PDOæ„é€ å‚æ•°
+     * ´´½¨Êı¾İÔ´£¬Ìá¹©¸øPDO¹¹Ôì²ÎÊı
      */
     private function _createDsn(array $dbConfig)
     {
@@ -148,12 +148,12 @@ class mysqlImpl implements DbProviderInterface
             $dsn .= trim($dbConfig['adapter']) . ':';
         }
         if (!isset($dbConfig['dbname']) || (!$dbConfig['dbname'])) {
-            throw new Exception('æœªé…ç½®dbnameå‚æ•°');
+            throw new Exception('Î´ÅäÖÃdbname²ÎÊı');
         } else {
             $dsn .= 'dbname=' . trim($dbConfig['dbname']) . ';';
         }
         if (!isset($dbConfig['host']) || (!$dbConfig['host'])) {
-            throw new Exception('æœªé…ç½®hostå‚æ•°');
+            throw new Exception('Î´ÅäÖÃhost²ÎÊı');
         } else {
             $dsn .= 'host=' . trim($dbConfig['host']);
             if (!isset($dbConfig['port']) || (!$dbConfig['port'])) {
@@ -170,7 +170,7 @@ class mysqlImpl implements DbProviderInterface
 
     /**
      * @return int
-     * è¿”å›æœ€åä¸€æ¬¡sqlæ‰§è¡Œå—å½±å“çš„è¡Œæ•°
+     * ·µ»Ø×îºóÒ»´ÎsqlÖ´ĞĞÊÜÓ°ÏìµÄĞĞÊı
      */
     public function getRowCount()
     {
@@ -215,7 +215,7 @@ class mysqlImpl implements DbProviderInterface
     public function update($tableName, array $columns, array $where = null)
     {
         if (!$columns) {
-            throw new Exception("columns å‚æ•°ä¸ºç©º");
+            throw new Exception("columns ²ÎÊıÎª¿Õ");
         }
 
         $set = array();
@@ -448,14 +448,14 @@ class mysqlImpl implements DbProviderInterface
 
     /**
      * @throws Exception
-     * æ„é€ selectæŸ¥è¯¢è¯­å¥
+     * ¹¹Ôìselect²éÑ¯Óï¾ä
      */
     public function buildQuery()
     {
         $sql = 'SELECT ';
         $sql .= !empty($this->_sqlQuery['SELECT']) ? $this->_sqlQuery['SELECT'] : '*';
         if (empty($this->_sqlQuery['FROM'])) {
-            throw new Exception("FROM å‚æ•°ä¸ºç©º");
+            throw new Exception("FROM ²ÎÊıÎª¿Õ");
         } else {
             $sql .= ' FROM ' . $this->_sqlQuery['FROM'];
         }
@@ -471,7 +471,7 @@ class mysqlImpl implements DbProviderInterface
     }
 
     /**
-     * æŸ¥è¯¢ä¹‹åæ‰€æœ‰å­—æ®µæ¸…ç©ºå¤„ç†
+     * ²éÑ¯Ö®ºóËùÓĞ×Ö¶ÎÇå¿Õ´¦Àí
      */
     public function _unsetSqlQuery()
     {
@@ -575,7 +575,7 @@ class mysqlImpl implements DbProviderInterface
     /**
      * @param null $sql
      * @return PDOStatement
-     * æä¾›åŸç”Ÿæ‹¼æ¥æ–¹å¼æ‰§è¡Œsqlè¯­å¥
+     * Ìá¹©Ô­ÉúÆ´½Ó·½Ê½Ö´ĞĞsqlÓï¾ä
      */
     public function query($sql = null)
     {
@@ -632,7 +632,7 @@ class mysqlImpl implements DbProviderInterface
     }
 
     /**
-     * è¿”å›æ‰§è¡Œçš„sqlè¯­å¥
+     * ·µ»ØÖ´ĞĞµÄsqlÓï¾ä
      */
     public function getPrepareSql()
     {
@@ -641,7 +641,7 @@ class mysqlImpl implements DbProviderInterface
 
     /**
      * @return string
-     * è¿”å›æœ€åä¸€æ¬¡æ’å…¥id
+     * ·µ»Ø×îºóÒ»´Î²åÈëid
      */
     public function lastInsertId()
     {
@@ -651,11 +651,11 @@ class mysqlImpl implements DbProviderInterface
     /**
      * @param PDOStatement $stmt
      * @param array $data
-     * å°†å ä½ç¬¦æ›¿æ¢ä¸ºå…·ä½“value
+     * ½«Õ¼Î»·ûÌæ»»Îª¾ßÌåvalue
      */
     public function bindValue(PDOStatement $stmt, array $data)
     {
-        //é¢„ç¼–è¯‘å ä½ç¬¦é»˜è®¤ä»1å¼€å§‹è®¡æ•°
+        //Ô¤±àÒëÕ¼Î»·ûÄ¬ÈÏ´Ó1¿ªÊ¼¼ÆÊı
         $i = 1;
         foreach ($data as $key => $value) {
             $dataType = $this->getBindValueDataType($value);
@@ -669,7 +669,7 @@ class mysqlImpl implements DbProviderInterface
     /**
      * @param $value
      * @return int
-     * è¿”å›å ä½ç¬¦é¢„ç¼–è¯‘æ•°æ®ç±»å‹
+     * ·µ»ØÕ¼Î»·ûÔ¤±àÒëÊı¾İÀàĞÍ
      */
     public function getBindValueDataType($value)
     {

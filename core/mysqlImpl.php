@@ -231,10 +231,9 @@ class mysqlImpl implements DbProviderInterface
             $sql = 'UPDATE ' . $tableName . ' SET ' . implode(', ', $set);
             $this->where($where);
             $sql .= $this->getWhere();
-            $whereValue = array_values($this->_sqlQuery['WHERE']);
-            $val = array_merge($bindValue, $whereValue);
+            $value = array_merge($bindValue, $this->_sqlQuery['WHERE']);
             $stmt = $this->_db->prepare($sql);
-            $this->bindValue($stmt, $val);
+            $this->bindValue($stmt, $value);
             $this->_stmt->execute();
             $this->_rowCount = $this->_stmt->rowCount();
             $this->_stmt->closeCursor();
@@ -260,8 +259,7 @@ class mysqlImpl implements DbProviderInterface
             $this->where($where);
             $sql .= $this->getWhere();
             $stmt = $this->_db->prepare($sql);
-            $val = array_values($this->_sqlQuery['WHERE']);
-            $this->bindValue($stmt, $val);
+            $this->bindValue($stmt, $this->_sqlQuery['WHERE']);
             $this->_stmt->execute();
             $this->_rowCount = $this->_stmt->rowCount();
             $this->_stmt->closeCursor();
@@ -691,6 +689,8 @@ class mysqlImpl implements DbProviderInterface
 }
 $db = mysqlImpl::getInstance();
 //$db->insert('user',array('id'=>3,'name'=>'firebroo'));
-print_r($db->select()->from('user')->where(array('id >='=>1,'id <'=>100))->having(array('name ='=>'dog'))->group('id')->limit(1)->offset(0)->queryAll());
+//print_r($db->select()->from('user')->where(array('id >='=>1,'id <'=>100))->having(array('name ='=>'dog'))->group('id')->limit(1)->offset(0)->queryAll());
+//$db->delete('user',array('id ='=>1));
+$db->update('user',array('name '=>'dogman'),array('id >'=>2));
 
 

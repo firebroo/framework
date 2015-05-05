@@ -615,15 +615,9 @@ class mysqlImpl implements DbProviderInterface
         try {
             $this->buildQuery();
             $stmt = $this->_db->prepare($this->_querySql);
-            if($this->_sqlQuery['WHERE'] && $this->_sqlQuery['HAVING']) {
-                $arr = array_merge($this->_sqlQuery['WHERE'],$this->_sqlQuery['HAVING']);
-                $this->bindValue($stmt,$arr);
-            }
-            if ($this->_sqlQuery['WHERE']) {
-                $this->bindValue($stmt, $this->_sqlQuery['WHERE']);
-            }
-            if ($this->_sqlQuery['HAVING']) {
-                $this->bindValue($stmt, $this->_sqlQuery['HAVING']);
+            $mergeArr = array_merge($this->_sqlQuery['WHERE'],$this->_sqlQuery['HAVING']);
+            if($mergeArr) {
+                $this->bindValue($stmt,$mergeArr);
             }
             $this->_stmt->execute();
             $this->_unsetSqlQuery();

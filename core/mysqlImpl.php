@@ -692,6 +692,6 @@ class mysqlImpl implements DbProviderInterface
 }
 $db = mysqlImpl::getInstance();
 //$db->insert('user',array('id'=>3,'name'=>'firebroo'));
-print_r($db->select()->from('user')->where(array('id >='=>1))->having(array('name ='=>'dog'))->group('id')->limit(1)->offset(0)->queryAll());
+print_r($db->select()->from('user')->where(array('id >='=>1,'id <'=>100))->having(array('name ='=>'dog'))->group('id')->limit(1)->offset(0)->queryAll());
 
 

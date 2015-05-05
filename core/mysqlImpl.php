@@ -96,9 +96,11 @@ class mysqlImpl implements DbProviderInterface
         }
 
         $dsn = $this->_createDsn($dbConfig);
+        echo $dsn;
         try {
             $this->_db = new PDO($dsn, $dbConfig['username'], $dbConfig['password']);
         } catch (Exception $ex) {
+            echo $ex;
             throw new Exception('´´½¨PDOÊ§°Ü');
         }
 
@@ -589,17 +591,10 @@ class mysqlImpl implements DbProviderInterface
         try {
             $this->buildQuery();
             $stmt = $this->_db->prepare($this->_querySql);
-            if($this->_sqlQuery['WHERE'] && $this->_sqlQuery['HAVING']) {
-                $arr = array_merge($this->_sqlQuery['WHERE'],$this->_sqlQuery['HAVING']);
-                $this->bindValue($stmt,$arr);
+            $mergeArr = array_merge($this->_sqlQuery['WHERE'],$this->_sqlQuery['HAVING']);
+            if($mergeArr) {
+                $this->bindValue($stmt,$mergeArr);
             }
-            if ($this->_sqlQuery['WHERE']) {
-                $this->bindValue($stmt, $this->_sqlQuery['WHERE']);
-            }
-            if ($this->_sqlQuery['HAVING']) {
-                $this->bindValue($stmt, $this->_sqlQuery['HAVING']);
-            }
-
             $this->_stmt->execute();
             $this->_rowCount = $this->_stmt->rowCount();
             $this->_unsetSqlQuery();
@@ -699,6 +694,7 @@ class mysqlImpl implements DbProviderInterface
     }
 }
 $db = mysqlImpl::getInstance();
-print_r($db->select()->from('user')->having(array('name ='=>'dog'))->where(array('id >'=>1))->group('id')->limit(1)->offset(1)->queryAll());
+//$db->insert('user',array('id'=>3,'name'=>'firebroo'));
+print_r($db->select()->from('user')->having(array('name ='=>'dog'))->group('id')->limit(1)->offset(0)->queryAll());
 
 

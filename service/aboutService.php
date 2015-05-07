@@ -21,5 +21,5 @@ class aboutService
     }
 }
 
-$service = new aboutService(new aboutDao());
+$service = new aboutService(new aboutDao('user'));
 

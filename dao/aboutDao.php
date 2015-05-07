@@ -8,10 +8,12 @@
 include(dirname(dirname(__FILE__)) . "/db/DbMysqlImpl.php");
 class aboutDao {
     private static $Db;
-    public function __construct() {
+    private static $table;
+    public function __construct($table) {
         aboutDao::$Db = DbMysqlImpl::getInstance();
+        aboutDao::$table = $table;
     }
     public static function aboutSelect($name) {
-        return aboutDao::$Db->select()->from('user')->where(array('name ='=>$name))->queryAll();
+        return aboutDao::$Db->select()->from(aboutDao::$table)->where(array('name ='=>$name))->queryAll();
     }
 }

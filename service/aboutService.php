@@ -15,8 +15,8 @@ class aboutService
     }
     public function show($request)
     {
-        $id = intval($request['id']);
-        $result = $this->aboutDao->aboutSelect($id);
+        $name = $request['name'];
+        $result = $this->aboutDao->aboutSelect($name);
         return $result;
     }
 }

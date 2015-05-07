@@ -467,7 +467,6 @@ class DbMysqlImpl implements DbProviderInterface
         $sql .= !empty($this->_sqlQuery['ORDER']) ? ' ORDER BY ' . $this->_sqlQuery['ORDER'] : '';
         $sql .= $this->_sqlQuery['LIMIT'] > 0 ? ' LIMIT ' . (int)$this->_sqlQuery['LIMIT'] : '';
         $sql .= $this->_sqlQuery['OFFSET'] > 0 ? ' OFFSET ' . (int)$this->_sqlQuery['OFFSET'] : '';
-        echo $sql."\n";
         $this->_querySql = $sql;
     }
 
@@ -687,9 +686,10 @@ class DbMysqlImpl implements DbProviderInterface
         return $param;
     }
 }
-$db = DbMysqlImpl::getInstance();
+//$db = DbMysqlImpl::getInstance();
+//print_r($db->select()->from('user')->where(array('id ='=>101))->queryAll());;
 //$db->insert('user',array('id'=>3,'name'=>'firebroo'));
-print_r($db->select()->from('user AS admin')->where(array('id >='=>1,'id <'=>1000))->group('id')->limit(1)->offset(0)->queryAll());
+//print_r($db->select()->from('user AS admin')->where(array('id >='=>1,'id <'=>1000))->group('id')->limit(1)->offset(0)->queryAll());
 //$db->delete('user',array('id ='=>1));
 //$db->update('user',array('name '=>'dogman'),array('id >'=>1000));
 

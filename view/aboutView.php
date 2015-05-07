@@ -7,7 +7,10 @@
  */
 class aboutView {
     public function display(array $arr) {
-        echo $arr['username'];
+        foreach($arr as $key => $value) {
+            echo $value['id']."\t".$value['name']."<br/>";
+        }
+
     }
 }
 $view = new aboutView();

@@ -7,7 +7,7 @@
  */
 include(dirname(__FILE__) . '/DbProviderInterface.php');
 
-class mysqlImpl implements DbProviderInterface
+class DbMysqlImpl implements DbProviderInterface
 {
     /**
      * @var 单例对象
@@ -110,12 +110,12 @@ class mysqlImpl implements DbProviderInterface
 
     /**
      * @param null $config
-     * @return mysqlImpl
+     * @return DbMysqlImpl
      * 获取Db单例
      */
     public static function getInstance($config = null)
     {
-        if (!self::$_instance instanceof mysqlImpl) {
+        if (!self::$_instance instanceof DbMysqlImpl) {
             self::$_instance = new self($config);
         }
 
@@ -687,10 +687,10 @@ class mysqlImpl implements DbProviderInterface
         return $param;
     }
 }
-$db = mysqlImpl::getInstance();
+$db = DbMysqlImpl::getInstance();
 //$db->insert('user',array('id'=>3,'name'=>'firebroo'));
-//print_r($db->select()->from('user')->where(array('id >='=>1,'id <'=>100))->having(array('name ='=>'dog'))->group('id')->limit(1)->offset(0)->queryAll());
+print_r($db->select()->from('user AS admin')->where(array('id >='=>1,'id <'=>1000))->group('id')->limit(1)->offset(0)->queryAll());
 //$db->delete('user',array('id ='=>1));
-$db->update('user',array('name '=>'dogman'),array('id >'=>2));
+//$db->update('user',array('name '=>'dogman'),array('id >'=>1000));
 
 

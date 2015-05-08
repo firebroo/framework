@@ -115,7 +115,7 @@ class DbMysqlImpl implements DbProviderInterface
      */
     public static function getInstance($config = null)
     {
-        if (!self::$_instance instanceof DbMysqlImpl) {
+        if (!self::$_instance instanceof self) {
             self::$_instance = new self($config);
         }
 

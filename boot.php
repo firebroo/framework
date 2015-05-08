@@ -11,3 +11,4 @@ define('CONTROLLER_PATH',ROOT_PATH.DS.'controller');
 define('VIEW_PATH',ROOT_PATH.DS.'view');
 define('SERVICE_PATH',ROOT_PATH.DS.'service');
 define('HELPER_PATH',ROOT_PATH.DS.'helper');
+define('IOC_PATH',ROOT_PATH.DS.'ioc');

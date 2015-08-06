@@ -1,11 +1,11 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: Administrator
  * Date: 2015/8/6
  * Time: 10:21
  */
-
 class userController
 {
     private $view;
@@ -59,9 +59,10 @@ class userController
         $this->view->showUserDelete($result);
     }
 
-    public function updateUser()
+    public function updateUser($request)
     {
-
+        $result = $this->service->updateUser($request);
+        $this->view->showUserUpdate($result);
     }
 
     public function selectUser()

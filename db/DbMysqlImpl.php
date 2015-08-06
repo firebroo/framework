@@ -125,7 +125,9 @@ class DbMysqlImpl implements DbProviderInterface
     /**
      * 防止深拷贝产生新的对象
      */
-    public function __clone() {}
+    public function __clone()
+    {
+    }
 
     /**
      * 释放数据库连接
@@ -145,7 +147,7 @@ class DbMysqlImpl implements DbProviderInterface
     private function _createDsn(array $dbConfig)
     {
         $dsn = '';
-        if (!isset($dbConfig['adapter']) || !$dbConfig['adapter'])  {
+        if (!isset($dbConfig['adapter']) || !$dbConfig['adapter']) {
             $dsn .= self::DEFAULT_ADAPTER_TYPE . ':';
         } else {
             $dsn .= trim($dbConfig['adapter']) . ':';
@@ -465,10 +467,10 @@ class DbMysqlImpl implements DbProviderInterface
         $sql .= !empty($this->_sqlQuery['GROUP']) ? ' GROUP BY ' . $this->_sqlQuery['GROUP'] : '';
         $sql .= $this->getHaving();
         $sql .= !empty($this->_sqlQuery['ORDER']) ? ' ORDER BY ' . $this->_sqlQuery['ORDER'] : '';
-        $sql .= $this->_sqlQuery['LIMIT'] > 0 ? ' LIMIT ' .$this->_sqlQuery['LIMIT'] : '';
-        $sql .= $this->_sqlQuery['OFFSET'] > 0 ? ' OFFSET ' .$this->_sqlQuery['OFFSET'] : '';
+        $sql .= $this->_sqlQuery['LIMIT'] > 0 ? ' LIMIT ' . $this->_sqlQuery['LIMIT'] : '';
+        $sql .= $this->_sqlQuery['OFFSET'] > 0 ? ' OFFSET ' . $this->_sqlQuery['OFFSET'] : '';
         $this->_querySql = $sql;
-        echo $sql."</br>";
+        echo $sql . "</br>";
     }
 
     /**
@@ -592,9 +594,9 @@ class DbMysqlImpl implements DbProviderInterface
         try {
             $this->buildQuery();
             $stmt = $this->_db->prepare($this->_querySql);
-            $mergeArr = array_merge($this->_sqlQuery['WHERE'],$this->_sqlQuery['HAVING']);
-            if($mergeArr) {
-                $this->bindValue($stmt,$mergeArr);
+            $mergeArr = array_merge($this->_sqlQuery['WHERE'], $this->_sqlQuery['HAVING']);
+            if ($mergeArr) {
+                $this->bindValue($stmt, $mergeArr);
             }
             $this->_stmt->execute();
             $this->_rowCount = $this->_stmt->rowCount();
@@ -616,9 +618,9 @@ class DbMysqlImpl implements DbProviderInterface
         try {
             $this->buildQuery();
             $stmt = $this->_db->prepare($this->_querySql);
-            $mergeArr = array_merge($this->_sqlQuery['WHERE'],$this->_sqlQuery['HAVING']);
-            if($mergeArr) {
-                $this->bindValue($stmt,$mergeArr);
+            $mergeArr = array_merge($this->_sqlQuery['WHERE'], $this->_sqlQuery['HAVING']);
+            if ($mergeArr) {
+                $this->bindValue($stmt, $mergeArr);
             }
             $this->_stmt->execute();
             $this->_unsetSqlQuery();

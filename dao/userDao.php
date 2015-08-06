@@ -33,4 +33,10 @@ class userDao
         static::$Db->delete('user', array('id = ' => $id));
         return true;
     }
+
+    public function userUpdate($name, $id)
+    {
+        static::$Db->update('user', array('name' => $name), array('id =' => $id));
+        return true;
+    }
 }

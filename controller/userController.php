@@ -65,7 +65,9 @@ class userController
         $this->view->showUserUpdate($result);
     }
 
-    public function selectUser()
+    public function selectUser($request)
     {
+        $result = $this->service->selectUser($request);
+        $this->view->showUserSelect($result);
     }
 }

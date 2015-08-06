@@ -19,19 +19,27 @@ class userService
     {
         $id = $request['id'];
         $name = $request['name'];
-        return $this->userDao->userInsert($id, $name) ? "save customer information successful" : "error";
+        $sex = $request['sex'];
+        return $this->userDao->userInsert($id, $name, $sex) ? "save customer information successful" : "user already exist!";
     }
 
     public function deleteUser($request)
     {
         $id = $request['id'];
-        return $this->userDao->userDelete($id) ? "delete customer information successful" : "error";
+        return $this->userDao->userDelete($id) ? "delete customer information successful" : "user not exist, delete fail";
     }
 
     public function updateUser($request)
     {
         $id = $request['id'];
         $name = $request['name'];
-        return $this->userDao->userUpdate($name, $id) ? "update customer information successful" : "error";
+        $sex = $request['sex'];
+        return $this->userDao->userUpdate($name, $id, $sex) ? "update customer information successful" : "user not exist, update fail";
+    }
+
+    public function selectUser($request) {
+        $id = $request['id'];
+        $user =  $this->userDao->userSelect($id);
+        return $user? $user:"user not exist";
     }
 }

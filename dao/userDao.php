@@ -17,26 +17,38 @@ class userDao
         static::$table = $table;
     }
 
-    public function userSelect($name)
+    public function userSelect($id)
     {
-        return static::$Db->select()->from(static::$table)->where(array('name =' => $name))->queryAll();
+        return static::$Db->select()->from(static::$table)->where(array('id =' => $id))->queryAll();
     }
 
-    public function userInsert($id, $name)
+    public function userInsert($id, $name, $sex)
     {
-        static::$Db->insert('user', array("id" => $id, "name" => $name));
-        return true;
+        $count = static::$Db->fetchCount('user', '*', array('id = ' => $id));
+        if (!$count) {
+            static::$Db->insert(static::$table, array("id" => $id, "name" => $name, "sex" => $sex));
+            return true;
+        }
+        return false;
     }
 
     public function userDelete($id)
     {
-        static::$Db->delete('user', array('id = ' => $id));
-        return true;
+        $count = static::$Db->fetchCount('user', '*', array('id = ' => $id));
+        if ($count > 0) {
+            static::$Db->delete(static::$table, array('id = ' => $id));
+            return true;
+        }
+        return false;
     }
 
-    public function userUpdate($name, $id)
+    public function userUpdate($name, $id, $sex)
     {
-        static::$Db->update('user', array('name' => $name), array('id =' => $id));
-        return true;
+        $count = static::$Db->fetchCount('user', '*', array('id = ' => $id));
+        if ($count > 0) {
+            static::$Db->update(static::$table, array('name' => $name, 'sex' => $sex), array('id =' => $id));
+            return true;
+        }
+        return false;
     }
 }

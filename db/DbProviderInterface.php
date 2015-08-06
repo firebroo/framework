@@ -22,6 +22,6 @@ interface DbProviderInterface
 
     public function fetchRow($tableName, $columns = '*', array $where = array(), $order = null);
 
-    public function fetchCount($tableName, $columns = '*', array $where = array());
+    public function fetchCount($tableName, $columns = '*',array $where = array());
 
 }

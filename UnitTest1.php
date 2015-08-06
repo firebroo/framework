@@ -8,3 +8,5 @@
 $a = function () {
     return "helloworld";
 };
+
+echo gettype(array());

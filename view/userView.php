@@ -22,4 +22,17 @@ class view
     {
         echo $result;
     }
+
+    public function showUserSelect($result) {
+        if (gettype($result) == 'string') {
+            echo $result;
+        }
+        if (gettype($result) == 'array') {
+            foreach($result as $key => $user) {
+                foreach($user as $key2 => $value) {
+                    echo $key2.":\t".$value."</br>";
+                }
+            }
+        }
+    }
 }

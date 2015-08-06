@@ -19,6 +19,11 @@ class userService
     {
         $id = $request['id'];
         $name = $request['name'];
-        return $this->userDao->userInsert($id, $name) ? "save Customer information successful" : "error";
+        return $this->userDao->userInsert($id, $name) ? "save customer information successful" : "error";
+    }
+
+    public  function deleteUser($request) {
+        $id = $request['id'];
+        return $this->userDao->userDelete($id)? "delete customer information successful" : "error";
     }
 }

@@ -9,4 +9,8 @@ class view {
     public function showUserSave($result) {
        echo $result;
     }
+
+    public function showUserDelete($result) {
+       echo $result;
+    }
 }

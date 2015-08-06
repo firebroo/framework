@@ -53,9 +53,10 @@ class userController
         $this->view->showUserSave($result);
     }
 
-    public function deleteUser()
+    public function deleteUser($request)
     {
-
+        $result = $this->service->deleteUser($request);
+        $this->view->showUserDelete($result);
     }
 
     public function updateUser()

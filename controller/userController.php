@@ -5,26 +5,6 @@
  * Date: 2015/8/6
  * Time: 10:21
  */
-/*include(dirname(dirname(__FILE__)) . '/index.php');
-include VIEW_PATH . "/userView.php";
-include SERVICE_PATH . "/userService.php";
-include DAO_PATH . "/userDao.php";
-include DB_PATH . "/DbMysqlImpl.php";
-include HELPER_PATH . "/actionHelper.php";
-include IOC_PATH . "/Ioc.php";
-$action = $_REQUEST['act'];
-if (actionHelper::isAllowedAction('userController', $action)) {
-    IOC::register('user', function () {
-        $about = new userController();
-        $about->setService(new userService(new userDao('user')));
-        $about->setView(new view());
-        return $about;
-    });
-    $about = IOC::resolve('user');
-    $about->$action($_REQUEST);
-} else {
-    exit('not allowed action');
-}*/
 
 class userController
 {

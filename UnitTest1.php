@@ -8,4 +8,3 @@
 $a = function () {
     return "helloworld";
 };
-echo gettype("hello");

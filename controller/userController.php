@@ -2,29 +2,31 @@
 /**
  * Created by PhpStorm.
  * User: Administrator
- * Date: 2015/5/4
- * Time: 20:41
+ * Date: 2015/8/6
+ * Time: 10:21
  */
-include(dirname(dirname(__FILE__)) . '/index.php');
-include VIEW_PATH . "/aboutView.php";
-include SERVICE_PATH . "/aboutService.php";
+/*include(dirname(dirname(__FILE__)) . '/index.php');
+include VIEW_PATH . "/userView.php";
+include SERVICE_PATH . "/userService.php";
+include DAO_PATH . "/userDao.php";
+include DB_PATH . "/DbMysqlImpl.php";
 include HELPER_PATH . "/actionHelper.php";
 include IOC_PATH . "/Ioc.php";
 $action = $_REQUEST['act'];
-if (actionHelper::isAllowedAction('aboutController', $action)) {
-    IOC::register('about', function () use ($service, $view) {
-        $about = new aboutController();
-        $about->setService($service);
-        $about->setView($view);
+if (actionHelper::isAllowedAction('userController', $action)) {
+    IOC::register('user', function () {
+        $about = new userController();
+        $about->setService(new userService(new userDao('user')));
+        $about->setView(new view());
         return $about;
     });
-    $about = IOC::resolve('about');
+    $about = IOC::resolve('user');
     $about->$action($_REQUEST);
 } else {
     exit('not allowed action');
-}
+}*/
 
-class aboutController
+class userController
 {
     private $view;
     private $service;
@@ -65,16 +67,23 @@ class aboutController
     {
     }
 
-    public function index(array $request)
+    public function saveUser($request)
     {
-        $resultModel = $this->service->show($request);
-        $this->view->display($resultModel);
+        $result = $this->service->saveUser($request);
+        $this->view->showUserSave($result);
     }
 
-    public function saveUser(array $request) {
-        $result = $this->service->saveUser($request);
-        $this->view->display($result);
+    public function deleteUser()
+    {
+
+    }
+
+    public function updateUser()
+    {
+
+    }
+
+    public function selectUser()
+    {
     }
 }
-
-

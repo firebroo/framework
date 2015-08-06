@@ -6,7 +6,11 @@
  * Time: 20:01
  */
 class aboutView {
-    public function display(array $arr) {
+    public function display($arr) {
+        if (gettype($arr) == "string") {
+            echo $arr;
+            return ;
+        }
         foreach($arr as $key => $value) {
             echo $value['id']."\t".$value['name']."<br/>";
         }

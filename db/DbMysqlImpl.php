@@ -5,7 +5,7 @@
  * Date: 2015/5/5
  * Time: 8:51
  */
-include(dirname(__FILE__) . '/DbProviderInterface.php');
+include_once(dirname(__FILE__) . '/DbProviderInterface.php');
 
 class DbMysqlImpl implements DbProviderInterface
 {

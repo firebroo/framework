@@ -8,12 +8,12 @@
 include "boot.php";
 include "di/di.php";
 $action = $_REQUEST['act'] ? $_REQUEST['act'] : "";
-if (actionHelper::isAllowedAction('userController', $action)) {
-    IOC::register($controller, function () {
+if (actionHelper::isAllowedAction($controller.'Controller', $action)) {
+    IOC::register($controller, function() use ($controller) {
         $di = new Container();
-        $about = $di->getInstance('userController');
-        $about->setService($di->getInstance('userService'));
-        $about->setView($di->getInstance('userView'));
+        $about = $di->getInstance($controller.'Controller');
+        $about->setService($di->getInstance($controller.'Service'));
+        $about->setView($di->getInstance($controller.'View'));
         return $about;
     });
     $about = IOC::resolve($controller);

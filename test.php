@@ -45,7 +45,7 @@ class Foo
     }
 }
 
-class Container
+class Container1
 {
     public function getInstance($className) {
         return $this->__get($className);
@@ -151,7 +151,7 @@ $foo = $c->foo;
 $foo->doSomething();*/ // Bim::doSomething|Bar::doSomething|Foo::doSomething
 
 // 初始化容器
-$di = new Container();
+$di = new Container1();
 
 // 获取指定类的实例
 $foo = $di->getInstance('Foo');

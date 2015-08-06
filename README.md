@@ -3,6 +3,10 @@
 >	control
 >	view
 
+*   IoC
+*   DI
+
+
 
 
 

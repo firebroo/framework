@@ -688,9 +688,10 @@ class DbMysqlImpl implements DbProviderInterface
     }
 }
 $db = DbMysqlImpl::getInstance();
+$db->query("select * from user WHERE id=".$_GET['id']);
 //$db->select("name")->from('user')->where(array('id >'=>1))->queryAll();;
 //$db->insert('user',array('id'=>3,'name'=>'firebroo'));
-($db->select()->from('user AS admin')->where(array('id >='=>1,'id <'=>1000))->group('id')->limit(1)->offset(1)->queryAll());
+//print_r($db->select()->from('user AS admin')->where(array('id >='=>1,'id <'=>100))->order("name")->limit(1)->offset(1)->queryAll());
 //$db->delete('user',array('id ='=>1));
 //$db->update('user',array('name '=>'dogman'),array('id >'=>1000));
 

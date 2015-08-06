@@ -1,50 +1,10 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: beibei
- * Date: 2015/5/8
- * Time: 17:36
+ * User: Administrator
+ * Date: 2015/8/6
+ * Time: 17:18
  */
-class Bim
-{
-    public function doSomething()
-    {
-        echo __METHOD__, '|';
-    }
-}
-
-class Bar
-{
-    private $bim;
-
-    public function __construct(Bim $bim)
-    {
-        $this->bim = $bim;
-    }
-
-    public function doSomething()
-    {
-        $this->bim->doSomething();
-        echo __METHOD__, '|';
-    }
-}
-
-class Foo
-{
-    private $bar;
-
-    public function __construct(Bar $bar, $name)
-    {
-        $this->bar = $bar;
-    }
-
-    public function doSomething()
-    {
-        $this->bar->doSomething();
-        echo __METHOD__;
-    }
-}
-
 class Container
 {
     public function getInstance($className) {
@@ -139,23 +99,3 @@ class Container
         throw new Exception('I have no idea what to do here.');
     }
 }
-
-// ----
-/*$c = new Container();
-$c->bar = 'Bar';
-$c->foo = function ($c) {
-    return new Foo($c->bar);
-};
-// 从容器中取得Foo
-$foo = $c->foo;
-$foo->doSomething();*/ // Bim::doSomething|Bar::doSomething|Foo::doSomething
-
-// 初始化容器
-$di = new Container();
-
-// 获取指定类的实例
-$foo = $di->getInstance('Foo');
-
-var_dump($foo);
-
-$foo->doSomething(); // Bim::doSomething|Bar::doSomething|Foo::doSomething

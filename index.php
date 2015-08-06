@@ -6,15 +6,17 @@
  * Time: 20:03
  */
 include "boot.php";
-$action = $_REQUEST['act']?$_REQUEST['act']:"";
+include "di/di.php";
+$action = $_REQUEST['act'] ? $_REQUEST['act'] : "";
 if (actionHelper::isAllowedAction('userController', $action)) {
-    IOC::register('user', function () {
-        $about = new userController();
-        $about->setService(new userService(new userDao('user')));
-        $about->setView(new view());
+    IOC::register($controller, function () {
+        $di = new Container();
+        $about = $di->getInstance('userController');
+        $about->setService($di->getInstance('userService'));
+        $about->setView($di->getInstance('userView'));
         return $about;
     });
-    $about = IOC::resolve('user');
+    $about = IOC::resolve($controller);
     $about->$action($_REQUEST);
 } else {
     exit('not allowed action');

@@ -10,7 +10,7 @@ class userService
 {
     private $userDao;
 
-    public function __construct($dao)
+    public function __construct(userDao $dao)
     {
         $this->userDao = $dao;
     }

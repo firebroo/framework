@@ -9,12 +9,11 @@
 class userDao
 {
     private static $Db;
-    private static $table;
+    private static $table = 'user';
 
-    public function __construct($table)
+    public function __construct()
     {
         static::$Db = DbMysqlImpl::getInstance();
-        static::$table = $table;
     }
 
     public function userSelect($id)

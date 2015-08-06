@@ -6,7 +6,7 @@
  * Date: 2015/8/6
  * Time: 10:22
  */
-class view
+class userView
 {
     public function showUserSave($result)
     {

@@ -11,18 +11,19 @@ include SERVICE_PATH . "/aboutService.php";
 include HELPER_PATH . "/actionHelper.php";
 include IOC_PATH . "/Ioc.php";
 $action = $_REQUEST['act'];
-if(actionHelper::isAllowedAction('aboutController',$action)) {
-   IOC::register('about',function() use ($service,$view){
-      $about = new aboutController();
+if (actionHelper::isAllowedAction('aboutController', $action)) {
+    IOC::register('about', function () use ($service, $view) {
+        $about = new aboutController();
         $about->setService($service);
         $about->setView($view);
         return $about;
     });
-    $about=IOC::resolve('about');
+    $about = IOC::resolve('about');
     $about->index($_REQUEST);
-}else {
+} else {
     exit('not allowed action');
 }
+
 class aboutController
 {
     private $view;
@@ -60,7 +61,9 @@ class aboutController
         $this->service = $service;
     }
 
-    public function __construct(){}
+    public function __construct()
+    {
+    }
 
     public function index(array $request)
     {

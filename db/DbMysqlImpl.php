@@ -468,7 +468,7 @@ class DbMysqlImpl implements DbProviderInterface
         $sql .= $this->_sqlQuery['LIMIT'] > 0 ? ' LIMIT ' .$this->_sqlQuery['LIMIT'] : '';
         $sql .= $this->_sqlQuery['OFFSET'] > 0 ? ' OFFSET ' .$this->_sqlQuery['OFFSET'] : '';
         $this->_querySql = $sql;
-        echo $sql;
+        echo $sql."</br>";
     }
 
     /**
@@ -687,8 +687,8 @@ class DbMysqlImpl implements DbProviderInterface
         return $param;
     }
 }
-$db = DbMysqlImpl::getInstance();
-$db->query("select * from user WHERE id=".$_GET['id']);
+//  $db = DbMysqlImpl::getInstance();
+//$db->query("select * from user WHERE id=".$_GET['id']);
 //$db->select("name")->from('user')->where(array('id >'=>1))->queryAll();;
 //$db->insert('user',array('id'=>3,'name'=>'firebroo'));
 //print_r($db->select()->from('user AS admin')->where(array('id >='=>1,'id <'=>100))->order("name")->limit(1)->offset(1)->queryAll());

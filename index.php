@@ -7,8 +7,9 @@
  */
 include "boot.php";
 include "di/di.php";
-$action = $_REQUEST['act'] ? $_REQUEST['act'] : "";
+
 if (actionHelper::isAllowedAction($controller.'Controller', $action)) {
+    /*
     IOC::register($controller, function() use ($controller) {
         $di = new Container();
         $about = $di->getInstance($controller.'Controller');
@@ -18,6 +19,11 @@ if (actionHelper::isAllowedAction($controller.'Controller', $action)) {
     });
     $about = IOC::resolve($controller);
     $about->$action($_REQUEST);
+    */
+    $di = new Container();
+    $user = $di->getInstance($controller."Controller");
+    //var_dump($user);
+    $user->$action($_REQUEST);
 } else {
     exit('not allowed action');
 }

@@ -16,6 +16,7 @@ define('HELPER_PATH', ROOT_PATH . DS . 'helper');
 define('IOC_PATH', ROOT_PATH . DS . 'ioc');
 
 $controller = $_GET['controller'] ? $_GET['controller'] : "";
+$action = $_REQUEST['act'] ? $_REQUEST['act'] : "";
 if (!file_exists(CONTROLLER_PATH . DS . $controller . "Controller.php")) {
     exit("Controller not exist");
 }

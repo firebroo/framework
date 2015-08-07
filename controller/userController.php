@@ -43,8 +43,10 @@ class userController
         $this->service = $service;
     }
 
-    public function __construct()
+    public function __construct(userService $userService, userView $userView)
     {
+        $this->service = $userService;
+        $this->view = $userView;
     }
 
     public function saveUser($request)
